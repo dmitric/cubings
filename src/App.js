@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Hammer from 'hammerjs'
 
+import {interpolateRdPu} from 'd3-scale-chromatic'
 
 let cubes = []
 let degs = []
@@ -42,12 +43,12 @@ class App extends Component {
     mc.get('swipe').set({ direction: Hammer.DIRECTION_ALL })
     mc.get('pinch').set({ enable: true })
 
-    mc.on("swipedown", ev => this.decrementDimension())
-      .on("swipeup", ev => this.incrementDimension())
-      //.on("swipeleft", ev => this.increaseChance())
-      //.on("swiperight", ev => this.decreaseChance())
-      .on("pinchin", ev => this.incrementDimension())
-      .on("pinchout", ev => this.decrementDimension())
+    mc.on("swipedown", ev => this.decrementRows())
+      .on("swipeup", ev => this.incrementRows())
+      .on("swipeleft", ev => this.incrementDimension())
+      .on("swiperight", ev => this.decrementDimension())
+      .on("pinchin", ev => {this.incrementDimension(); this.incrementRows()})
+      .on("pinchout", ev => {this.decrementDimension(); this.decrementRows()})
   }
 
   handleKeydown (ev) {
@@ -148,7 +149,7 @@ class App extends Component {
 
     for (let i = 0; i < this.state.dimension * this.state.rows; i++) {
       const center = new Point3(0, dy, 0)
-      const cube = cubes[i] || new Cube(center, Math.min(dx,dy) *0.5)
+      const cube = cubes[i] || new Cube(center, Math.min(dx, dy) *0.5)
       const deg = degs[i] || [ (Math.random() > 0.5 ? -1 : 1 ) * this.between(20, 360), (Math.random() > 0.5 ? -1 : 1 ) * this.between(20, 720)]
 
       if (cubes[i] === undefined) {
@@ -307,7 +308,7 @@ class Cube {
       }
 
       str += ` Z`
-      edges.push(<path key={i} d={str} fill="rgba(205, 0, 175, .1)" stroke='rgba(0, 0, 0, .5)' />)
+      edges.push(<path key={i} d={str} fill={interpolateRdPu(i/ii)} fillOpacity='0.2' stroke='rgba(0, 0, 0, .5)' />)
     }
 
     return edges
