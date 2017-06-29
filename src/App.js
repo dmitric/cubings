@@ -299,6 +299,7 @@ class Cube {
     return vertices
   }
 
+
   render (dx, dy) {
     const edges = []
 
@@ -314,11 +315,22 @@ class Cube {
       }
 
       str += ` Z`
-      edges.push(<path key={i} d={str} fill={interpolateRdYlBu(i/ii)} fillOpacity='0.2' stroke='black' strokeOpacity='0.5' />)
+      if (seconds % 2 == 0 ){
+        var col1 = "Black"
+        var col2 = "White"
+      } else {
+        var col1 = '#ef8a62'
+        var col2 = '#67a9cf'
+      }
+
+      edges.push(<path key={i} d={str} fill={i == 0 ? col1 : i == 2 ? col2 : 'none'} fillOpacity='0.2' stroke='black' strokeOpacity='0.5' />)
     }
 
     return edges
   }
 }
+
+var seconds = Date.seconds
+
 
 export default App;
