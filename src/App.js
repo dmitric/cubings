@@ -314,7 +314,7 @@ class Cube {
       }
 
       str += ` Z`
-      edges.push(<path key={i} d={str} fill={interpolateRdYlBu(i/ii)} fillOpacity='0.2' stroke='rgba(0, 0, 0, .5)' />)
+      edges.push(<path key={i} d={str} fill={interpolateRdYlBu(i/ii)} fillOpacity='0.2' stroke='black' strokeOpacity='0.5' />)
     }
 
     return edges
