@@ -16,8 +16,8 @@ class App extends Component {
     this.state = {
       backgroundColor: '#f5f5f5',
       displayColorPickers: true,
-      dimension: 2,
-      rows: 2,
+      dimension: 1,
+      rows: 1,
       padding: 120,
       width: 500,
       height: 500,
@@ -71,9 +71,15 @@ class App extends Component {
       this.toggleRun()
     } else if (ev.which === 40) {
       ev.preventDefault()
+      if (ev.metaKey || ev.ctrlKey) {
+        this.decrementDimension()
+      }
       this.decrementRows()
     } else if (ev.which === 38) {
       ev.preventDefault()
+      if (ev.metaKey || ev.ctrlKey) {
+        this.incrementDimension()
+      }
       this.incrementRows()
     } else if (ev.which === 37) {
       ev.preventDefault()
