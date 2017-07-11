@@ -315,12 +315,15 @@ class Cube {
       }
 
       str += ` Z`
-      if (seconds % 2 == 0 ){
-        var col1 = "Black"
-        var col2 = "White"
+
+      let col1, col2;
+
+      if (new Date().getSeconds() % 2 === 0 ){
+        col1 = "#111111"
+        col2 = "#ffffff"
       } else {
-        var col1 = '#ef8a62'
-        var col2 = '#67a9cf'
+        col1 = '#ef8a62'
+        col2 = '#67a9cf'
       }
 
       edges.push(<path key={i} d={str} fill={i == 0 ? col1 : i == 2 ? col2 : 'none'} fillOpacity='0.2' stroke='black' strokeOpacity='0.5' />)
@@ -329,8 +332,5 @@ class Cube {
     return edges
   }
 }
-
-var seconds = Date.seconds
-
 
 export default App;
