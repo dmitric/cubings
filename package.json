@@ -2,7 +2,7 @@
   "name": "cubings",
   "version": "0.1.0",
   "private": true,
-  "homepage" : "http://dmitric.github.io/cubings",
+  "homepage": "http://dmitric.github.io/cubings",
   "dependencies": {
     "d3-scale-chromatic": "^1.1.1",
     "hammerjs": "^2.0.8",
